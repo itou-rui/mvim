@@ -94,4 +94,7 @@ return {
 			table.insert(opts.sources, { name = "emoji" })
 		end,
 	},
+
+	-- INFO: Delete if you don't need it
+	{ "wakatime/vim-wakatime", lazy = false },
 }
