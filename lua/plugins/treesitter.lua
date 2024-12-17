@@ -63,6 +63,10 @@ return {
 			})
 
 			vim.treesitter.language.register("markdown", "mdx")
+
+			-- zsh
+			-- https://github.com/nvim-treesitter/nvim-treesitter/issues/655
+			vim.treesitter.language.register("bash", "zsh")
 		end,
 	},
 }
