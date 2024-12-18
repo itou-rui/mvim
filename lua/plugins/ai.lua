@@ -177,6 +177,48 @@ return {
 					description = "コードのパフォーマンスや可読性を向上させるための最適化案を提案するために使用します。",
 				},
 
+				-- /Docs
+				Docs = {
+					prompt = "> /COPILOT_GENERATE"
+						.. "\n\n"
+						.. "Generate detailed documentation for the specified code. Please include descriptions for functions, classes, parameters, and usage examples.\n"
+						.. "Consider the following points:\n\n"
+						.. "1. **Function Descriptions**:\n"
+						.. "  - Provide a clear explanation of each function's purpose and behavior.\n"
+						.. "  - Include information on its input parameters and return values.\n"
+						.. "\n\n"
+						.. "2. **Class Descriptions**:\n"
+						.. "  - If the code contains classes, provide a detailed description of each class, its methods, and properties.\n"
+						.. "  - Include example usage for the class and its methods.\n"
+						.. "\n\n"
+						.. "3. **Code Usage**:\n"
+						.. "  - Provide an example of how the code or function can be used, including any setup or dependencies.\n"
+						.. "  - Include any edge cases or important notes about the code's behavior.\n"
+						.. "\n\n"
+						.. "Finally, ensure the documentation is clear, concise, and easy to follow.",
+					description = "Used to generate detailed documentation for the provided code, including descriptions for functions, classes, arguments, and usage examples.",
+				},
+				DocsJa = {
+					prompt = "> /COPILOT_GENERATE"
+						.. "\n\n"
+						.. "指定したコードに対する詳細なドキュメントを作成してください。\n"
+						.. "関数やクラス、使い方、引数の説明などを含めてください。以下の点を考慮してください：\n\n"
+						.. "1. **関数の説明**：\n"
+						.. "  - 各関数が行う処理内容とその目的を明確に説明してください。\n"
+						.. "  - 引数や返り値についても記述してください。\n"
+						.. "\n\n"
+						.. "2. **クラスの説明**：\n"
+						.. "  - コードにクラスが含まれている場合、そのクラスの詳細な説明を行い、メソッドやプロパティも記載してください。\n"
+						.. "  - クラスやメソッドの使用例も提供してください。\n"
+						.. "\n\n"
+						.. "3. **コードの使い方**：\n"
+						.. "  - コードや関数の使用方法の例を示し、設定や依存関係についても説明してください。\n"
+						.. "  - エッジケースやコードの動作に関する重要な注意点があれば記載してください。\n"
+						.. "\n\n"
+						.. "最後に、ドキュメントは明確で簡潔、かつ理解しやすい内容にしてください。",
+					description = "指定したコードに対する詳細なドキュメントを作成するために使用します。",
+				},
+
 				-- /Commit
 				Commit = {
 					prompt = "> #git:unstaged"
