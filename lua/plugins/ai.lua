@@ -16,6 +16,7 @@ return {
 			local cached_gitdiff = nil
 
 			options.prompts = {
+
 				-- /Explain
 				Explain = {
 					prompt = "> /COPILOT_EXPLAIN"
@@ -258,6 +259,48 @@ return {
 						.. "\n\n"
 						.. "最後に、テストは明確で簡潔で、すべてのエッジケースと期待される動作をカバーするようにしてください。",
 					description = "指定したコードに対するテストコードを作成するために使用します。",
+				},
+
+				-- /FixDiagnostic
+				FixDiagnostic = {
+					prompt = "> /COPILOT_GENERATE"
+						.. "\n\n"
+						.. "Based on the diagnostic results, fix the issues identified in the code. Provide specific details on the fixes made and explain the reasoning behind each change. Consider the following:\n\n"
+						.. "1. **Problem Identification**:\n"
+						.. "  - Review the diagnostic results and identify the problems or errors in the code.\n"
+						.. "  - Explain the cause of the issues in detail, including any misconfigurations or logic errors.\n"
+						.. "\n\n"
+						.. "2. **Fix Implementation**:\n"
+						.. "  - Suggest how to fix the identified problems, with clear steps or code snippets.\n"
+						.. "  - Provide an explanation of why these fixes resolve the issues.\n"
+						.. "\n\n"
+						.. "3. **Testing and Validation**:\n"
+						.. "  - Recommend steps for testing the fixes to ensure that the code works as expected.\n"
+						.. "  - Provide any necessary tests or validation methods to confirm the resolution of the issue.\n"
+						.. "\n\n"
+						.. "Finally, explain the overall impact of these fixes on the stability and functionality of the code.",
+					description = "Used to fix issues in the code based on diagnostic tool results, providing specific fixes and explanations.",
+				},
+				FixDiagnosticJa = {
+					prompt = "> /COPILOT_GENERATE"
+						.. "\n\n"
+						.. "診断結果に基づいてコードの問題を修正してください。\n"
+						.. "修正内容とその理由を説明してください。以下の点を考慮してください：\n\n"
+						.. "1. **問題の特定**：\n"
+						.. "  - 診断結果を確認し、コード内で発生している問題やエラーを特定してください。\n"
+						.. "  - 問題の原因を詳細に説明し、設定ミスや論理エラーなどを明記してください。\n"
+						.. "\n\n"
+						.. "2. **修正案の実装**：\n"
+						.. "  - 特定された問題を修正するために、具体的な修正手順やコードを提案してください。\n"
+						.. "  - 提案した修正がどのように問題を解決するか、理由を説明してください。\n"
+						.. "\n\n"
+						.. "3. **テストと検証**：\n"
+						.. "  - 修正後、コードが期待通りに動作するか確認するためのテスト手順を提案してください。\n"
+						.. "  - 修正が解決したことを確認するために必要なテストや検証方法も提供してください。\n"
+						.. "\n\n"
+						.. "最後に、修正がコードの安定性や機能性に与える影響について説明してください。",
+					description = "診断ツールの結果に基づいてコードを修正するために使用します。",
+					selection = select.diagnostics or {},
 				},
 
 				-- /Commit
