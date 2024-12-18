@@ -91,6 +91,51 @@ return {
 					description = "指定されたコードに対するレビューを行うために使用します。",
 				},
 
+				-- /Fix
+				Fix = {
+					prompt = "> /COPILOT_GENERATE"
+						.. "\n\n"
+						.. "Identify the bugs or issues in the code and provide specific suggestions for fixing them. Consider the following points:\n\n"
+						.. "1. **Bug Identification**:\n"
+						.. "  - Clearly describe the bug or issue in the code.\n"
+						.. "  - Explain the cause of the bug or problem in detail, highlighting any problematic areas in the code.\n"
+						.. "  - Point out any edge cases or scenarios where the issue may occur.\n"
+						.. "\n\n"
+						.. "2. **Fix Proposal**:\n"
+						.. "  - Suggest how to fix the identified issue. Be specific about the changes required in the code.\n"
+						.. "  - Provide clear steps or code snippets for the fix.\n"
+						.. "  - If applicable, explain why the proposed fix resolves the issue and how it improves the code.\n"
+						.. "\n\n"
+						.. "3. **Testing**:\n"
+						.. "  - If possible, provide a suggestion for how to test the fix.\n"
+						.. "  - Recommend any unit tests or integration tests that would ensure the bug is resolved.\n"
+						.. "\n\n"
+						.. "Finally, explain the overall impact of the fix and how it improves the stability or functionality of the code.",
+					description = "It is used to fix problems (bugs and errors) occurring in the code.",
+				},
+				FixJa = {
+					prompt = "> /COPILOT_GENERATE"
+						.. "\n\n"
+						.. "コード内で発生しているバグや問題を特定し、修正案を具体的に提案してください。以下の点を考慮してください："
+						.. "\n\n"
+						.. "1. **バグの特定**：\n"
+						.. "  - コード内で発生しているバグや問題を明確に説明してください。\n"
+						.. "  - バグの原因を詳細に説明し、問題が発生している箇所を指摘してください。\n"
+						.. "  - バグが発生する可能性のあるエッジケースやシナリオについても言及してください。\n"
+						.. "\n\n"
+						.. "2. **修正案の提案**：\n"
+						.. "  - 特定した問題をどのように修正するか、具体的な修正方法を提案してください。\n"
+						.. "  - 修正のために必要なコードの変更箇所や手順を明示してください。\n"
+						.. "  - 提案した修正がどのように問題を解決するか、そしてコードがどのように改善されるかを説明してください。\n"
+						.. "\n\n"
+						.. "3. **テスト**：\n"
+						.. "  - 修正後、どのようにテストすべきか提案してください。\n"
+						.. "  - バグが解消されたことを確認するために、ユニットテストや統合テストの提案も行ってください。\n"
+						.. "\n\n"
+						.. "最後に、修正の影響とそのコードの安定性や機能性への改善点を説明してください。",
+					description = "コード内で発生している問題（バグやエラー）を修正するために使用します。",
+				},
+
 				-- /Commit
 				Commit = {
 					prompt = "> #git:unstaged"
