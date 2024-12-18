@@ -219,6 +219,47 @@ return {
 					description = "指定したコードに対する詳細なドキュメントを作成するために使用します。",
 				},
 
+				-- /Tests
+				Tests = {
+					prompt = "> /COPILOT_GENERATE"
+						.. "\n\n"
+						.. "Create test cases for the specified code. Consider which parts of the code should be tested and design test cases accordingly. Please include the following points:\n\n"
+						.. "1. **Test Coverage**:\n"
+						.. "  - Identify which parts of the code need to be tested, such as edge cases, functions, or modules.\n"
+						.. "  - Ensure full coverage of critical paths and functionality.\n"
+						.. "\n\n"
+						.. "2. **Test Types**:\n"
+						.. "  - Suggest the types of tests to be written, such as unit tests, integration tests, or functional tests.\n"
+						.. "  - Provide specific examples of test cases, including any setup or dependencies.\n"
+						.. "\n\n"
+						.. "3. **Testing Framework**:\n"
+						.. "  - Recommend a testing framework or methodology, if applicable.\n"
+						.. "  - Provide examples of how to structure the tests using the chosen framework.\n"
+						.. "\n\n"
+						.. "Finally, ensure the tests are clear, concise, and cover all edge cases and expected behaviors.",
+					description = "Used to create test cases for the provided code, covering critical paths, edge cases, and various test types.",
+				},
+				TestsJa = {
+					prompt = "> /COPILOT_GENERATE"
+						.. "\n\n"
+						.. "指定したコードに対するテストコードを作成してください。\n"
+						.. "どの部分をテストするかを考慮して、テストケースを設計してください。以下の点を考慮してください：\n\n"
+						.. "1. **テストのカバレッジ**：\n"
+						.. "  - テストが必要なコードの部分（エッジケースや関数、モジュールなど）を特定してください。\n"
+						.. "  - 重要な処理の部分や機能を網羅するようにしてください。\n"
+						.. "\n\n"
+						.. "2. **テストの種類**：\n"
+						.. "  - ユニットテスト、統合テスト、機能テストなど、どのタイプのテストを行うべきか提案してください。\n"
+						.. "  - テストケースの具体的な例を挙げ、セットアップや依存関係も記述してください。\n"
+						.. "\n\n"
+						.. "3. **テストフレームワーク**：\n"
+						.. "  - 使用するテストフレームワークや手法について提案してください。\n"
+						.. "  - 提案したフレームワークを使ったテスト構造の例を提供してください。\n"
+						.. "\n\n"
+						.. "最後に、テストは明確で簡潔で、すべてのエッジケースと期待される動作をカバーするようにしてください。",
+					description = "指定したコードに対するテストコードを作成するために使用します。",
+				},
+
 				-- /Commit
 				Commit = {
 					prompt = "> #git:unstaged"
