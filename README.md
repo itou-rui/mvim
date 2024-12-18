@@ -20,7 +20,7 @@ mvim is a Neovim configuration designed to enhance your development experience w
 2. Install the required plugins:
 
    ```sh
-   brew install nvim lazygit fzf nodebrew
+   brew install nvim lazygit fzf nodebrew lynx
    ```
 
 3. setup node the required plugins
