@@ -47,6 +47,50 @@ return {
 					description = "指定したコードが何をしているのかを理解するために使用します。",
 				},
 
+				-- /Review
+				Review = {
+					prompt = "> /COPILOT_REVIEW"
+						.. "\n\n"
+						.. "Review the readability, performance, and potential bugs in the code, and provide specific suggestions for improvement. Consider the following points:"
+						.. "\n\n"
+						.. "1. **Readability**:\n"
+						.. "  - Is the structure of the code easy to understand? Point out any redundant parts or suggest improvements for variable and function names.\n"
+						.. "  - If there are missing comments or parts where the explanation is insufficient, mention those as well.\n"
+						.. "  - Consider whether the code is modularized and if reusability has been taken into account."
+						.. "\n\n"
+						.. "2. **Performance**:\n"
+						.. "  - Are there any performance issues with the current code? If so, suggest specific parts that can be optimized.\n"
+						.. "  - Provide suggestions for optimizing the code, such as loop optimization or changes to data structures.\n"
+						.. "\n\n"
+						.. "3. **Bugs**:\n"
+						.. "  - If there are any bugs in the code, explain the causes and propose how to fix them.\n"
+						.. "  - Mention any parts of the code that could potentially have bugs."
+						.. "\n\n"
+						.. "Finally, provide specific improvement suggestions and explain why these changes would make the code better.",
+					description = "Used to perform a review for a given code.",
+				},
+				ReviewJa = {
+					prompt = "> /COPILOT_REVIEW"
+						.. "\n\n"
+						.. "コードの可読性、パフォーマンス、バグの有無についてレビューを行い、改善点を具体的に提案してください。以下の点を考慮してください："
+						.. "\n\n"
+						.. "1. **可読性**：\n"
+						.. "  - コードの構造は理解しやすいか？冗長な部分や改善できる変数名、関数名がある場合は指摘してください。\n"
+						.. "  - コメントが不足している場合や、説明が不十分な部分についても言及してください。\n"
+						.. "  - コードがモジュール化されているか、再利用性が考慮されているかも見てください。"
+						.. "\n\n"
+						.. "2. **パフォーマンス**：\n"
+						.. "  - 現在のコードにパフォーマンスの問題がないか、もし改善できる部分があれば具体的に指摘してください。\n"
+						.. "  - 処理の最適化が可能な箇所（例えば、ループの最適化やデータ構造の変更など）について提案してください。"
+						.. "\n\n"
+						.. "3. **バグの有無**：\n"
+						.. "  - コードにバグがある場合、その原因を説明し、どのように修正すればよいかを提案してください。\n"
+						.. "  - バグの可能性がありそうな箇所についても言及してください。"
+						.. "\n\n"
+						.. "最後に、どの部分を改善すればコードがさらに良くなるか、具体的な改善案とその理由を教えてください。",
+					description = "指定されたコードに対するレビューを行うために使用します。",
+				},
+
 				-- /Commit
 				Commit = {
 					prompt = "> #git:unstaged"
