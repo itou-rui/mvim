@@ -16,6 +16,37 @@ return {
 			local cached_gitdiff = nil
 
 			options.prompts = {
+				-- /Explain
+				Explain = {
+					prompt = "> /COPILOT_EXPLAIN"
+						.. "\n\n"
+						.. "Please briefly explain the following points regarding the operations and purpose of the code:"
+						.. "\n\n"
+						.. "1. The main functionality performed by the code\n"
+						.. "2. The purpose of the code (what the code aims to achieve)"
+						.. "\n\n"
+						.. "Then, please explain the following points clearly:"
+						.. "\n\n"
+						.. "1. The flow of the process (how the code works)\n"
+						.. "2. The intention behind the code (why it works in this way)",
+					description = "Used to understand what the specified code is doing.",
+				},
+				ExplainJa = {
+					prompt = "> /COPILOT_EXPLAIN"
+						.. "\n\n"
+						.. "このコードが行う処理とその目的について、以下の点を簡潔に説明してください："
+						.. "\n\n"
+						.. "1. コードが実行する主要な処理内容\n"
+						.. "2. コードの目的（何を達成するためのコードか）"
+						.. "\n\n"
+						.. "その後、次の点をわかりやすく説明してください："
+						.. "\n\n"
+						.. "1. 処理の流れ（どのように動作するか）\n"
+						.. "2. コードの意図（なぜそのように動作するのか）"
+						.. "\n\n",
+					description = "指定したコードが何をしているのかを理解するために使用します。",
+				},
+
 				-- /Commit
 				Commit = {
 					prompt = "> #git:unstaged"
