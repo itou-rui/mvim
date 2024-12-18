@@ -53,6 +53,12 @@ return {
 		end,
 	},
 
+	-- render-markdown
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		ft = { "markdown", "norg", "rmd", "org", "copilot-chat" },
+	},
+
 	-- toggleterm
 	{
 		"akinsho/toggleterm.nvim",
