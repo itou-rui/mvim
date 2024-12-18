@@ -136,6 +136,47 @@ return {
 					description = "コード内で発生している問題（バグやエラー）を修正するために使用します。",
 				},
 
+				-- /Optimize
+				Optimize = {
+					prompt = "> /COPILOT_GENERATE"
+						.. "\n\n"
+						.. "Suggest specific optimizations to improve the performance and readability of the code. Consider the following points:\n\n"
+						.. "1. **Performance Optimization**:\n"
+						.. "  - Identify any performance bottlenecks in the code (e.g., slow functions, excessive memory usage, etc.).\n"
+						.. "  - Suggest ways to optimize these areas, such as algorithm improvements or more efficient data structures.\n"
+						.. "\n\n"
+						.. "2. **Code Readability**:\n"
+						.. "  - Point out any parts of the code that are difficult to understand or overly complex.\n"
+						.. "  - Suggest refactoring opportunities, such as improving variable or function names, reducing nested loops, or simplifying logic.\n"
+						.. "\n\n"
+						.. "3. **Redundancy Removal**:\n"
+						.. "  - Identify redundant code or operations that can be removed or combined.\n"
+						.. "  - Suggest how to remove or optimize these parts to improve efficiency and maintainability.\n"
+						.. "\n\n"
+						.. "Finally, provide an explanation of how these optimizations would improve the overall quality of the code.",
+					description = "It is used to propose optimizations for improving the performance and readability of the code.",
+				},
+				OptimizeJa = {
+					prompt = "> /COPILOT_GENERATE"
+						.. "\n\n"
+						.. "コードのパフォーマンスや可読性を改善するための最適化案を提案してください。以下の点を考慮してください："
+						.. "\n\n"
+						.. "1. **パフォーマンスの最適化**：\n"
+						.. "  - コード内のパフォーマンスボトルネックを特定してください（例：遅い関数、過剰なメモリ使用など）。\n"
+						.. "  - アルゴリズムの改善やより効率的なデータ構造の使用など、最適化案を提案してください。\n"
+						.. "\n\n"
+						.. "2. **可読性の向上**：\n"
+						.. "  - 理解しにくい部分や過度に複雑なコードを指摘してください。\n"
+						.. "  - 変数名や関数名の改善、ネストの深いループの削減、ロジックの簡素化など、リファクタリング案を提案してください。\n"
+						.. "\n\n"
+						.. "3. **冗長性の削減**：\n"
+						.. "  - 冗長なコードや重複する処理を特定してください。\n"
+						.. "  - 効率や保守性を向上させるために、それらを削除または統合する方法を提案してください。\n"
+						.. "\n\n"
+						.. "最後に、これらの最適化がコードの全体的な品質にどのように改善をもたらすかを説明してください。",
+					description = "コードのパフォーマンスや可読性を向上させるための最適化案を提案するために使用します。",
+				},
+
 				-- /Commit
 				Commit = {
 					prompt = "> #git:unstaged"
