@@ -56,7 +56,7 @@ return {
 	-- render-markdown
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
-		ft = { "markdown", "norg", "rmd", "org", "copilot-chat" },
+		ft = { "markdown", "norg", "rmd", "org", "copilot-chat", "octo" },
 	},
 
 	-- toggleterm
