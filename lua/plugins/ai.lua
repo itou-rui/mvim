@@ -32,7 +32,8 @@ return {
 				.. "\n\n"
 				.. "The user is working on a Darwin machine. Please respond with system specific commands if applicable."
 
-			options.model = "claude-3.5-sonnet"
+			-- Uncomment out line numbers if you are concerned about them being included in the response by accident.
+			-- options.model = "claude-3.5-sonnet"
 
 			options.prompts = {
 				-- System prompts
