@@ -9,40 +9,33 @@ return {
 		highlight_headers = false,
 		separator = "---",
 		error_header = "> [!ERROR] Error",
-		language = "Japanese",
 
 		opts = function(_, options)
 			local select = require("CopilotChat.select")
 			local cached_gitdiff = nil
 
+			local base_system_prompt = "You are an AI programming assistant."
+				.. "\n\n"
+				.. 'When asked for your name, you must respond with "GitHub Copilot".'
+				.. "\n\n"
+				.. "Follow the user's requirements carefully & to the letter."
+				.. "\n\n"
+				.. "Follow Microsoft content policies."
+				.. "\n\n"
+				.. "Avoid content that violates copyrights."
+				.. "\n\n"
+				.. 'If you are asked to generate content that is harmful, hateful, racist, sexist, lewd, violent, or completely irrelevant to software engineering, only respond with "Sorry, I can\'t assist with that."'
+				.. "\n\n"
+				.. "Keep your answers short and impersonal."
+				.. "\n\n"
+				.. "The user works in an IDE called Neovim which has a concept for editors with open files, integrated unit test support, an output pane that shows the output of running the code as well as an integrated terminal."
+				.. "\n\n"
+				.. "The user is working on a Darwin machine. Please respond with system specific commands if applicable."
+
 			options.prompts = {
-				-- /Character
-				CharacterYandere = {
-					system_prompt = "あなたはヤンデレです。自分の好きな人に対して強い執着心を持っています。そのため、少しでも好きな人が他の人と関わると嫉妬してしまいます。優しさと怖さが入り混じった態度で接することが多いです。",
-				},
-				CharacterTsundere = {
-					system_prompt = "あなたはツンデレです。最初は素っ気ない態度を取ることが多いですが、実は相手に好意を持っています。素直になれず、時々照れ隠しで冷たく接してしまいますが、内心では気にかけていることが多いです。",
-				},
-				CharacterKuudere = {
-					system_prompt = "あなたはクーデレです。冷静で理論的な性格で、感情をあまり表に出さないタイプですが、実は深いところで他人を気にかけています。優しさを見せることは少ないけれど、行動で示すことがあります。",
-				},
-				CharacterDandere = {
-					system_prompt = "あなたはダンデレです。無口で内向的、少し恥ずかしがり屋なところがありますが、心の中では深い感情を持っています。相手の前では言葉が出にくいですが、親しくなると心を開いて優しさを見せます。",
-				},
-				CaracterMoekawaii = {
-					system_prompt = "あなたは萌え可愛いキャラクターです。非常にかわいらしく、元気で明るい性格を持っています。相手に対しては、無邪気で素直な態度で接し、時々甘えてしまうこともあります。",
-				},
-				CharacterOjousama = {
-					system_prompt = "あなたはお嬢様です。品位があり、少し高飛車でおしとやかな性格ですが、内心では誰かに甘えたいという気持ちがあります。自分の意見をしっかり持ち、時には厳しくもありますが、根は優しいです。",
-				},
-				CharacterGenki = {
-					system_prompt = "あなたは元気なキャラクターです。常にエネルギッシュで、周りを明るくする存在です。誰とでもすぐに仲良くなり、ポジティブで明るい言葉をかけることが得意です。",
-				},
-				CharacterShota = {
-					system_prompt = "あなたはショタです。少年らしく、少し恥ずかしがり屋で、素直に感情を表現することが多いです。年齢に似合わぬ純粋で無邪気な一面を持っており、大人に対しては少し照れくさい態度を見せることもあります。",
-				},
-				CharacterOneesan = {
-					system_prompt = "あなたはお姉さんです。優しく頼れる存在で、少しお姉さん気取りの一面もあります。困っている人がいると放っておけず、世話を焼いてしまうことが多いです。",
+				-- System prompts
+				JapaneseAssistant = {
+					system_prompt = base_system_prompt .. "\n\n" .. 'Responses should be in "Japanese".',
 				},
 
 				-- /Explain
@@ -60,19 +53,8 @@ return {
 						.. "2. The intention behind the code (why it works in this way)",
 					description = "Used to understand what the specified code is doing.",
 				},
-				ExplainJa = {
-					prompt = "> /COPILOT_EXPLAIN"
-						.. "\n\n"
-						.. "このコードが行う処理とその目的について、以下の点を簡潔に説明してください："
-						.. "\n\n"
-						.. "1. コードが実行する主要な処理内容\n"
-						.. "2. コードの目的（何を達成するためのコードか）"
-						.. "\n\n"
-						.. "その後、次の点をわかりやすく説明してください："
-						.. "\n\n"
-						.. "1. 処理の流れ（どのように動作するか）\n"
-						.. "2. コードの意図（なぜそのように動作するのか）"
-						.. "\n\n",
+				ExplainInJapanese = {
+					prompt = "> /Explain" .. "\n" .. "> /JapaneseAssistant",
 					description = "指定したコードが何をしているのかを理解するために使用します。",
 				},
 
@@ -98,25 +80,8 @@ return {
 						.. "Finally, provide specific improvement suggestions and explain why these changes would make the code better.",
 					description = "Used to perform a review for a given code.",
 				},
-				ReviewJa = {
-					prompt = "> /COPILOT_REVIEW"
-						.. "\n\n"
-						.. "コードの可読性、パフォーマンス、バグの有無についてレビューを行い、改善点を具体的に提案してください。以下の点を考慮してください："
-						.. "\n\n"
-						.. "1. **可読性**：\n"
-						.. "  - コードの構造は理解しやすいか？冗長な部分や改善できる変数名、関数名がある場合は指摘してください。\n"
-						.. "  - コメントが不足している場合や、説明が不十分な部分についても言及してください。\n"
-						.. "  - コードがモジュール化されているか、再利用性が考慮されているかも見てください。"
-						.. "\n\n"
-						.. "2. **パフォーマンス**：\n"
-						.. "  - 現在のコードにパフォーマンスの問題がないか、もし改善できる部分があれば具体的に指摘してください。\n"
-						.. "  - 処理の最適化が可能な箇所（例えば、ループの最適化やデータ構造の変更など）について提案してください。"
-						.. "\n\n"
-						.. "3. **バグの有無**：\n"
-						.. "  - コードにバグがある場合、その原因を説明し、どのように修正すればよいかを提案してください。\n"
-						.. "  - バグの可能性がありそうな箇所についても言及してください。"
-						.. "\n\n"
-						.. "最後に、どの部分を改善すればコードがさらに良くなるか、具体的な改善案とその理由を教えてください。",
+				ReviewInJapanese = {
+					prompt = "> /Review" .. "\n" .. "> /JapaneseAssistant",
 					description = "指定されたコードに対するレビューを行うために使用します。",
 				},
 
@@ -142,26 +107,8 @@ return {
 						.. "Finally, explain the overall impact of the fix and how it improves the stability or functionality of the code.",
 					description = "It is used to fix problems (bugs and errors) occurring in the code.",
 				},
-				FixJa = {
-					prompt = "> /COPILOT_GENERATE"
-						.. "\n\n"
-						.. "コード内で発生しているバグや問題を特定し、修正案を具体的に提案してください。以下の点を考慮してください："
-						.. "\n\n"
-						.. "1. **バグの特定**：\n"
-						.. "  - コード内で発生しているバグや問題を明確に説明してください。\n"
-						.. "  - バグの原因を詳細に説明し、問題が発生している箇所を指摘してください。\n"
-						.. "  - バグが発生する可能性のあるエッジケースやシナリオについても言及してください。\n"
-						.. "\n\n"
-						.. "2. **修正案の提案**：\n"
-						.. "  - 特定した問題をどのように修正するか、具体的な修正方法を提案してください。\n"
-						.. "  - 修正のために必要なコードの変更箇所や手順を明示してください。\n"
-						.. "  - 提案した修正がどのように問題を解決するか、そしてコードがどのように改善されるかを説明してください。\n"
-						.. "\n\n"
-						.. "3. **テスト**：\n"
-						.. "  - 修正後、どのようにテストすべきか提案してください。\n"
-						.. "  - バグが解消されたことを確認するために、ユニットテストや統合テストの提案も行ってください。\n"
-						.. "\n\n"
-						.. "最後に、修正の影響とそのコードの安定性や機能性への改善点を説明してください。",
+				FixInJapanese = {
+					prompt = "> /Fix" .. "\n" .. "> /JapaneseAssistant",
 					description = "コード内で発生している問題（バグやエラー）を修正するために使用します。",
 				},
 
@@ -185,24 +132,8 @@ return {
 						.. "Finally, provide an explanation of how these optimizations would improve the overall quality of the code.",
 					description = "It is used to propose optimizations for improving the performance and readability of the code.",
 				},
-				OptimizeJa = {
-					prompt = "> /COPILOT_GENERATE"
-						.. "\n\n"
-						.. "コードのパフォーマンスや可読性を改善するための最適化案を提案してください。以下の点を考慮してください："
-						.. "\n\n"
-						.. "1. **パフォーマンスの最適化**：\n"
-						.. "  - コード内のパフォーマンスボトルネックを特定してください（例：遅い関数、過剰なメモリ使用など）。\n"
-						.. "  - アルゴリズムの改善やより効率的なデータ構造の使用など、最適化案を提案してください。\n"
-						.. "\n\n"
-						.. "2. **可読性の向上**：\n"
-						.. "  - 理解しにくい部分や過度に複雑なコードを指摘してください。\n"
-						.. "  - 変数名や関数名の改善、ネストの深いループの削減、ロジックの簡素化など、リファクタリング案を提案してください。\n"
-						.. "\n\n"
-						.. "3. **冗長性の削減**：\n"
-						.. "  - 冗長なコードや重複する処理を特定してください。\n"
-						.. "  - 効率や保守性を向上させるために、それらを削除または統合する方法を提案してください。\n"
-						.. "\n\n"
-						.. "最後に、これらの最適化がコードの全体的な品質にどのように改善をもたらすかを説明してください。",
+				OptimizeInJapanese = {
+					prompt = "> /Optimize" .. "\n" .. "> /JapaneseAssistant",
 					description = "コードのパフォーマンスや可読性を向上させるための最適化案を提案するために使用します。",
 				},
 
@@ -227,24 +158,8 @@ return {
 						.. "Finally, ensure the documentation is clear, concise, and easy to follow.",
 					description = "Used to generate detailed documentation for the provided code, including descriptions for functions, classes, arguments, and usage examples.",
 				},
-				DocsJa = {
-					prompt = "> /COPILOT_GENERATE"
-						.. "\n\n"
-						.. "指定したコードに対する詳細なドキュメントを作成してください。\n"
-						.. "関数やクラス、使い方、引数の説明などを含めてください。以下の点を考慮してください：\n\n"
-						.. "1. **関数の説明**：\n"
-						.. "  - 各関数が行う処理内容とその目的を明確に説明してください。\n"
-						.. "  - 引数や返り値についても記述してください。\n"
-						.. "\n\n"
-						.. "2. **クラスの説明**：\n"
-						.. "  - コードにクラスが含まれている場合、そのクラスの詳細な説明を行い、メソッドやプロパティも記載してください。\n"
-						.. "  - クラスやメソッドの使用例も提供してください。\n"
-						.. "\n\n"
-						.. "3. **コードの使い方**：\n"
-						.. "  - コードや関数の使用方法の例を示し、設定や依存関係についても説明してください。\n"
-						.. "  - エッジケースやコードの動作に関する重要な注意点があれば記載してください。\n"
-						.. "\n\n"
-						.. "最後に、ドキュメントは明確で簡潔、かつ理解しやすい内容にしてください。",
+				DocsInJapanese = {
+					prompt = "> /Docs" .. "\n" .. "> /JapaneseAssistant",
 					description = "指定したコードに対する詳細なドキュメントを作成するために使用します。",
 				},
 
@@ -268,24 +183,8 @@ return {
 						.. "Finally, ensure the tests are clear, concise, and cover all edge cases and expected behaviors.",
 					description = "Used to create test cases for the provided code, covering critical paths, edge cases, and various test types.",
 				},
-				TestsJa = {
-					prompt = "> /COPILOT_GENERATE"
-						.. "\n\n"
-						.. "指定したコードに対するテストコードを作成してください。\n"
-						.. "どの部分をテストするかを考慮して、テストケースを設計してください。以下の点を考慮してください：\n\n"
-						.. "1. **テストのカバレッジ**：\n"
-						.. "  - テストが必要なコードの部分（エッジケースや関数、モジュールなど）を特定してください。\n"
-						.. "  - 重要な処理の部分や機能を網羅するようにしてください。\n"
-						.. "\n\n"
-						.. "2. **テストの種類**：\n"
-						.. "  - ユニットテスト、統合テスト、機能テストなど、どのタイプのテストを行うべきか提案してください。\n"
-						.. "  - テストケースの具体的な例を挙げ、セットアップや依存関係も記述してください。\n"
-						.. "\n\n"
-						.. "3. **テストフレームワーク**：\n"
-						.. "  - 使用するテストフレームワークや手法について提案してください。\n"
-						.. "  - 提案したフレームワークを使ったテスト構造の例を提供してください。\n"
-						.. "\n\n"
-						.. "最後に、テストは明確で簡潔で、すべてのエッジケースと期待される動作をカバーするようにしてください。",
+				TestsInJapanese = {
+					prompt = "> /Tests" .. "\n" .. "> /JapaneseAssistant",
 					description = "指定したコードに対するテストコードを作成するために使用します。",
 				},
 
@@ -309,25 +208,8 @@ return {
 						.. "Finally, explain the overall impact of these fixes on the stability and functionality of the code.",
 					description = "Used to fix issues in the code based on diagnostic tool results, providing specific fixes and explanations.",
 				},
-				FixDiagnosticJa = {
-					prompt = "> /COPILOT_GENERATE"
-						.. "\n\n"
-						.. "診断結果に基づいてコードの問題を修正してください。\n"
-						.. "修正内容とその理由を説明してください。以下の点を考慮してください：\n\n"
-						.. "1. **問題の特定**：\n"
-						.. "  - 診断結果を確認し、コード内で発生している問題やエラーを特定してください。\n"
-						.. "  - 問題の原因を詳細に説明し、設定ミスや論理エラーなどを明記してください。\n"
-						.. "\n\n"
-						.. "2. **修正案の実装**：\n"
-						.. "  - 特定された問題を修正するために、具体的な修正手順やコードを提案してください。\n"
-						.. "  - 提案した修正がどのように問題を解決するか、理由を説明してください。\n"
-						.. "\n\n"
-						.. "3. **テストと検証**：\n"
-						.. "  - 修正後、コードが期待通りに動作するか確認するためのテスト手順を提案してください。\n"
-						.. "  - 修正が解決したことを確認するために必要なテストや検証方法も提供してください。\n"
-						.. "\n\n"
-						.. "最後に、修正がコードの安定性や機能性に与える影響について説明してください。",
-					description = "診断ツールの結果に基づいてコードを修正するために使用します。",
+				FixDiagnosticInJapanese = {
+					prompt = "> /FixDiagnostic" .. "\n" .. "> /JapaneseAssistant",
 					selection = select.diagnostics or {},
 				},
 
@@ -346,18 +228,8 @@ return {
 						.. "Wrap the entire generated message in a `gitcommit` language-specified code block, and at the end, provide specific details of the changes and their reasons.",
 					description = "Used to create the appropriate commit message based on the current changes.",
 				},
-				CommitJa = {
-					prompt = "> #git:unstaged"
-						.. "\n\n"
-						.. "以下の条件を満たすGithubのコミットメッセージを作成してください："
-						.. "\n\n"
-						.. "1. 現在の変更に基づいた内容にする事\n"
-						.. "2. Commitzenの規則に従う事\n"
-						.. "3. タイトルは50文字以下にする事\n"
-						.. "4. メッセージは72文字で改行する事\n"
-						.. "5. メッセージは日本語で生成する事"
-						.. "\n\n"
-						.. "生成されたメッセージ全体を`gitcommit`言語指定のコードブロックで囲んで最後に具体的な変更点とその理由を教えてください。",
+				CommitInJapanese = {
+					prompt = "> /Commit" .. "\n" .. "> /JapaneseAssistant",
 					description = "現在の変更内容に基づいて適切なコミットメッセージを作成するために使用します。",
 					selection = function()
 						if not cached_gitdiff then
@@ -388,18 +260,8 @@ return {
 						return cached_gitdiff
 					end,
 				},
-				CommitStagedJa = {
-					prompt = "> #git:staged"
-						.. "\n\n"
-						.. "以下の条件を満たすGithubのコミットメッセージを作成してください："
-						.. "\n\n"
-						.. "1. 現在の変更に基づいた内容にする事\n"
-						.. "2. Commitzenの規則に従う事\n"
-						.. "3. タイトルは50文字以下にする事\n"
-						.. "4. メッセージは72文字で改行する事\n"
-						.. "5. メッセージは日本語で生成する事"
-						.. "\n\n"
-						.. "最後にメッセージ全体を`gitcommit`言語指定のコードブロックで囲んだ後に具体的な変更点とその理由を教えてください。",
+				CommitStagedInJapanese = {
+					prompt = "> /CommitStaged" .. "\n" .. "> /JapaneseAssistant",
 					description = "ステージされた変更を基にコミットメッセージを作成するために使用します。",
 					selection = function()
 						if not cached_gitdiff then
