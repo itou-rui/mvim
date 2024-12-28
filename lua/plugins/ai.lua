@@ -270,6 +270,28 @@ return {
 						return cached_gitdiff
 					end,
 				},
+
+				-- Evaluation
+				Evaluation = {
+					prompt = "> /COPILOT_EVALUATE"
+						.. "\n\n"
+						.. "Please evaluate the following points regarding the quality and performance of the code:"
+						.. "\n\n"
+						.. "1. The efficiency of the code (is it optimized for performance?)"
+						.. "\n"
+						.. "2. The readability and maintainability of the code (is the code easy to understand and modify?)"
+						.. "\n"
+						.. "3. The scalability of the code (can the code handle increased load or future changes?)"
+						.. "\n\n"
+						.. "Additionally, please provide any suggestions for improving the code or any potential issues you have identified."
+						.. "\n\n"
+						.. "Please provide a clear, concise evaluation of the code's strengths and weaknesses.",
+					description = "Used to evaluate the quality, performance, and maintainability of the specified code, along with recommendations for improvement.",
+				},
+				EvaluationInJapanese = {
+					prompt = "> /Evaluation" .. "\n" .. "> /JapaneseAssistant",
+					description = "指定したコードを評価するために使用します。",
+				},
 			}
 
 			-- Define custom contexts
