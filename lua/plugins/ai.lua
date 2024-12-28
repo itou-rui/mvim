@@ -290,7 +290,7 @@ return {
 				},
 				EvaluationInJapanese = {
 					prompt = "> /Evaluation" .. "\n" .. "> /JapaneseAssistant",
-					description = "指定したコードを評価するために使用します。",
+					description = "指定されたコードの品質、性能、保守性を評価し、改善勧告を行うために使用します。",
 				},
 			}
 
